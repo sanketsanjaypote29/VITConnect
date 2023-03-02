@@ -1,36 +1,23 @@
 <?php
 include ('../config.php');
-if (isset($_POST['getp'])) {
-  session_start();
- $bikername=$_SESSION['user'];
-  $bike_no = $_POST['bikeno'];
-  $phone_no = $_POST['phoneno'];
-  $helmet_check = $_POST['helmetcheck'];
-  $gender_radio = $_POST['gndr'];
-  $location_check = $_POST['location'];
-  $dept = $_POST['department'];
-  $year_check = $_POST['year'];
-  
+if(isset($_POST['submit'])) 
+{
 
-  // $bike_re = "";
-  $bikeins= "INSERT INTO `rider` (`bikeno`,`phoneno`,`location`,`helmet`,`department`,`year`,`gender`,`name`) VALUES ('$bike_no', '$phone_no', '$location_check', '$helmet_check', '$dept', '$year_check', '$gender_radio','$bikername')";
-  
-if (mysqli_query($conn, $bikeins)) {
+$name=$_POST['name'];
+$add=$_POST['Address'];
+$location=$_POST['location'];
+$phone=$_POST['phone'];
+$dept=$_POST['department'];
+$year=$_POST['year'];
+$gender=$_POST['gendr'];
+$qurey1="INSERT INTO `roommate`(`rname`, `rphone`, `radd`, `rlocation`, `rdpet`, `ryear`, `rgender`) VALUES ('$name','$phone','$add','$location','$dept','$year','$gender')";
+
+if (mysqli_query($conn, $qurey1)) {
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
-  
-
-  
 }
-
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html >
@@ -38,7 +25,7 @@ if (mysqli_query($conn, $bikeins)) {
 <script src="https://kit.fontawesome.com/ed98ca1227.js" crossorigin="anonymous"></script>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registration form</title>
+    <title>share room</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -79,8 +66,6 @@ if (mysqli_query($conn, $bikeins)) {
                 <ul class="nav" id="main-menu">
                  
 
-
-
                 <li class="active-link">
                         <a href="homepage.php"><i class="fa fa-desktop "></i>Home </a>
                     </li>
@@ -103,7 +88,6 @@ if (mysqli_query($conn, $bikeins)) {
                     <li>
                         <a href="./forum/index.php"><i class="fa fa-quora" aria-hidden="true" alt='forum image'></i></i>Community Forum</a>
                     </li>
-
                     <li>
                         <a href="logout.php"><i class="fa fa-edit "></i>Logout</a>
                     </li>
@@ -124,7 +108,7 @@ if (mysqli_query($conn, $bikeins)) {
                  
                 <div class="row">
                     <div class="col-lg-12 ">
-                      
+                        
                        
                     </div>
                     </div>
@@ -132,49 +116,44 @@ if (mysqli_query($conn, $bikeins)) {
                  
                   <!-- /. form  --> 
                   <div class="content">
-                    <h3>Hello,Enter Information</h3>
+                    <h4>Hello, Enter Details </h4>
       <form method="POST">
         <div class="user-details">
-          <div class="input-box">
-            <span class="details">Vehicle No.</span>
-            <input type="varchar" name="bikeno" placeholder="ST00VR2022" required>
+        <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" name="name" placeholder="Name" required>
           </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <input type="text" name="Address"placeholder="Enter your PG/Hostel Name" required>
+          </div>
+         
           <div class="input-box">
             <span class="details">Phone No.</span>
-            <input type="phone" name="phoneno" placeholder="Phone Number" required>
+            <input type="text" name="phone" placeholder="Enter your Phone No." required>
           </div>
-          <div class="checkbox-wrapper-19">
-  <input type="checkbox" id="cbtest-19" name="licensecheck" value="yes" required/>
-  <span>I have Driver's License</span>&emsp;
-  <input type="checkbox" id="cbtest-20" name="helmetcheck" value="yes"/>
-  <span>Extra Helmet</span>
-</div>
           <div class="input-box">
           <span class="details">Location</span>
-          <select name="location" class="box" required>
-      <option value="Bibwewadi" name="Bibwewadi">Bibwewadi</option>
-      <option value="kondhwa" name="Kondhwa">Kondhwa</option>
-      <option value="Lower_Indiranagar" name="Lower_Indiranagar">Lower Indiranagar</option>
-      <option value="Upper_Indiranagar" name="Upper_Indiranagar">Upper Indiranagar</option>
-      <option value="Chintamaninagar1" name="Chintamaninagar1">Chintamaninagar-1</option>
-      <option value="Chintamaninagar2" name="Chintamaninagar2"selected>Chintamaninagar-2</option>
-      <option value="Dhankavdi" name="Dhankavdi">Dhankavdi</option>
-      <option value="Kothrud" name="Kothrud">Kothrud</option>
-
+          <select name="location" class="box">
+      <option value="Bibwewadi">Bibwewadi</option>
+      <option value="Kondhva">Kondhva</option>
+      <option value="Lower_Indiranagar">Lower Indiranagar</option>
+      <option value="Upper_Indiranagar">Upper Indiranagar</option>
+      <option value="Chintamaninagar1">Chintamaninagar 1</option>
+      <option value="Chintamaninagar2" selected>Chintamaninagar 2</option>
     </select>
           </div>
         
          
 <div class="input-box">
           <span class="details">Department</span>
-          <select name="department" class="box" required>
-      <option value="CS" name="CS">CS</option>
-      <option value="IT" name="IT">IT</option>
-      <option value="AIDS" name="AIDS" selected>AI&DS</option>
-      <option value="E&TC" name="E&TC">E&TC</option>
-      <option value="Mechanical" name="Mechanical">Mechanical</option>
-      <option value="Chemical" name="Chemical">Chemical</option>
-      <option value="Instrumentation" name="Instrumentation">Instrumentation</option>
+          <select name="department" class="box">
+      <option value="CS">CS</option>
+      <option value="IT">IT</option>
+      <option value="AIDS" selected>AIDS</option>
+      <option value="Mechanical" >Mechanical</option>
+      <option value="Chemical" >Chemical</option>
+      <option value="Intrument" >Instrument</option>
     </select>
           </div>
           <div class="input-box">
@@ -189,9 +168,9 @@ if (mysqli_query($conn, $bikeins)) {
           
         </div>
         <div class="gender-details">
-          <input type="radio" name="gndr" id="dot-1" value="Male" required>
-          <input type="radio" name="gndr" id="dot-2" value="Female" required>
-          <input type="radio" name="gndr" id="dot-3" value="Prefer not to say" required>
+        <input type="radio" name="gendr" id="dot-1" value="Male" required>
+          <input type="radio" name="gendr" id="dot-2" value="Female" required>
+          <input type="radio" name="gendr" id="dot-3" value="Prefer not to say" required>
           <span >Gender</span>
           <div class="category">
             <label for="dot-1">
@@ -209,24 +188,8 @@ if (mysqli_query($conn, $bikeins)) {
           </div>
         </div>
         <div class="button">
-          <a href="bs-simple-admin/bikebuddy_1.php"><input type="submit" name="getp" value="Get your Bike Partner">
+          <input type="submit" name="submit" value="Get your Room  Partner">
         </div>
-
-
-        <?php
-
-//if (isset($_POST['getp'])){
-
- // header("Location:bs-simple-admin/bikebuddy_1.php");
-
-
-//}
-        
-        
-        
-        ?>
-
-
       </form>
     </div>
             <!-- /. WRAPPER  -->

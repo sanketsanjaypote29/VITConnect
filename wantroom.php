@@ -1,37 +1,3 @@
-<?php
-include ('../config.php');
-if (isset($_POST['getp'])) {
-  session_start();
- $bikername=$_SESSION['user'];
-  $bike_no = $_POST['bikeno'];
-  $phone_no = $_POST['phoneno'];
-  $helmet_check = $_POST['helmetcheck'];
-  $gender_radio = $_POST['gndr'];
-  $location_check = $_POST['location'];
-  $dept = $_POST['department'];
-  $year_check = $_POST['year'];
-  
-
-  // $bike_re = "";
-  $bikeins= "INSERT INTO `rider` (`bikeno`,`phoneno`,`location`,`helmet`,`department`,`year`,`gender`,`name`) VALUES ('$bike_no', '$phone_no', '$location_check', '$helmet_check', '$dept', '$year_check', '$gender_radio','$bikername')";
-  
-if (mysqli_query($conn, $bikeins)) {
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-  
-
-  
-}
-
-?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html >
 <head>
@@ -48,6 +14,7 @@ if (mysqli_query($conn, $bikeins)) {
     <link href="assets/css/style.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src='demo.php'></script>
 </head>
 <body>
      
@@ -79,8 +46,6 @@ if (mysqli_query($conn, $bikeins)) {
                 <ul class="nav" id="main-menu">
                  
 
-
-
                 <li class="active-link">
                         <a href="homepage.php"><i class="fa fa-desktop "></i>Home </a>
                     </li>
@@ -95,7 +60,7 @@ if (mysqli_query($conn, $bikeins)) {
 
 
                     <li>
-                        <a href="buy_sell2.php"><i class="fa fa-lightbulb-o "></i>Buy/Sell</a>
+                        <a href="buysellhome.php"><i class="fa fa-lightbulb-o "></i>Buy/Sell</a>
                     </li>
                     <li>
                         <a href="roommate.php"><i class="fa fa-users"></i>Room Mate</a>
@@ -121,10 +86,10 @@ if (mysqli_query($conn, $bikeins)) {
                 </div>              
                  <!-- /. ROW  -->
                 
-                 
+                  
                 <div class="row">
                     <div class="col-lg-12 ">
-                      
+                       
                        
                     </div>
                     </div>
@@ -132,66 +97,51 @@ if (mysqli_query($conn, $bikeins)) {
                  
                   <!-- /. form  --> 
                   <div class="content">
-                    <h3>Hello,Enter Information</h3>
-      <form method="POST">
+                    <h2>Hello, Username</h2>
+      <form action="roomsharerlist.php">
         <div class="user-details">
-          <div class="input-box">
-            <span class="details">Vehicle No.</span>
-            <input type="varchar" name="bikeno" placeholder="ST00VR2022" required>
-          </div>
-          <div class="input-box">
+        <div class="input-box">
             <span class="details">Phone No.</span>
-            <input type="phone" name="phoneno" placeholder="Phone Number" required>
+            <input type="text" placeholder="Enter your Phone No." required>
           </div>
-          <div class="checkbox-wrapper-19">
-  <input type="checkbox" id="cbtest-19" name="licensecheck" value="yes" required/>
-  <span>I have Driver's License</span>&emsp;
-  <input type="checkbox" id="cbtest-20" name="helmetcheck" value="yes"/>
-  <span>Extra Helmet</span>
-</div>
           <div class="input-box">
           <span class="details">Location</span>
-          <select name="location" class="box" required>
-      <option value="Bibwewadi" name="Bibwewadi">Bibwewadi</option>
-      <option value="kondhwa" name="Kondhwa">Kondhwa</option>
-      <option value="Lower_Indiranagar" name="Lower_Indiranagar">Lower Indiranagar</option>
-      <option value="Upper_Indiranagar" name="Upper_Indiranagar">Upper Indiranagar</option>
-      <option value="Chintamaninagar1" name="Chintamaninagar1">Chintamaninagar-1</option>
-      <option value="Chintamaninagar2" name="Chintamaninagar2"selected>Chintamaninagar-2</option>
-      <option value="Dhankavdi" name="Dhankavdi">Dhankavdi</option>
-      <option value="Kothrud" name="Kothrud">Kothrud</option>
-
+          <select name="location" class="box">
+      <option value="Bibvewadi">Bibvewadi</option>
+      <option value="Kondhva">Kondhva</option>
+      <option value="Lower Indiranagar">Lower Indiranagar</option>
+      <option value="Upper Indiranagar" >Upper Indiranagar</option>
+      <option value="Chintamaninagar 1" >Chintamaninagar 1</option>
+      <option value="Chintamaninagar 2" selected>Chintamaninagar 2</option>
     </select>
           </div>
         
-         
 <div class="input-box">
           <span class="details">Department</span>
-          <select name="department" class="box" required>
-      <option value="CS" name="CS">CS</option>
-      <option value="IT" name="IT">IT</option>
-      <option value="AIDS" name="AIDS" selected>AI&DS</option>
-      <option value="E&TC" name="E&TC">E&TC</option>
-      <option value="Mechanical" name="Mechanical">Mechanical</option>
-      <option value="Chemical" name="Chemical">Chemical</option>
-      <option value="Instrumentation" name="Instrumentation">Instrumentation</option>
+          <select name="department" class="box">
+      <option value="CS">CS</option>
+      <option value="IT">IT</option>
+      <option value="AIDS" selected>AIDS</option>
+      <option value="Mechanical" >Mechanical</option>
+      <option value="Chemical" >Chemical</option>
+      <option value="Intrument" >Intrument</option>
     </select>
           </div>
           <div class="input-box">
           <span class="details">Year</span>
-          <select name="year" class="box" required>
-      <option value="1st" name="1st">1st</option>
-      <option value="2nd" name="2nd">2nd</option>
-      <option value="3rd" name="3rd">3rd</option>
-      <option value="4th" name="4th">4th</option>
+          <select name="language" class="box">
+      <option value="1st">1st</option>
+      <option value="2nd">2nd</option>
+      <option value="3rd">3rd</option>
+      <option value="4th" selected>4th</option>
     </select>
           </div>
           
         </div>
         <div class="gender-details">
-          <input type="radio" name="gndr" id="dot-1" value="Male" required>
-          <input type="radio" name="gndr" id="dot-2" value="Female" required>
-          <input type="radio" name="gndr" id="dot-3" value="Prefer not to say" required>
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
           <span >Gender</span>
           <div class="category">
             <label for="dot-1">
@@ -209,24 +159,8 @@ if (mysqli_query($conn, $bikeins)) {
           </div>
         </div>
         <div class="button">
-          <a href="bs-simple-admin/bikebuddy_1.php"><input type="submit" name="getp" value="Get your Bike Partner">
+          <input type="submit" value="Get your room ">
         </div>
-
-
-        <?php
-
-//if (isset($_POST['getp'])){
-
- // header("Location:bs-simple-admin/bikebuddy_1.php");
-
-
-//}
-        
-        
-        
-        ?>
-
-
       </form>
     </div>
             <!-- /. WRAPPER  -->

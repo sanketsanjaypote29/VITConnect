@@ -1,28 +1,48 @@
 <?php
-include ('../config.php');
+
+include('../config.php');
 if (isset($_POST['getp'])) {
-  session_start();
- $bikername=$_SESSION['user'];
-  $bike_no = $_POST['bikeno'];
-  $phone_no = $_POST['phoneno'];
-  $helmet_check = $_POST['helmetcheck'];
-  $gender_radio = $_POST['gndr'];
-  $location_check = $_POST['location'];
-  $dept = $_POST['department'];
-  $year_check = $_POST['year'];
-  
+  $subject=$_POST['sub'];
+  $name2=$_POST['name'];
+  $phone=$_POST['phoneno'];
+  $platform=$_POST['platform'];
+  $dept=$_POST['department'];
+  $year1=$_POST['year'];
+  $meet1link=$_POST['meetlink1'];
+  $time1=$_POST['appt'];
 
-  // $bike_re = "";
-  $bikeins= "INSERT INTO `rider` (`bikeno`,`phoneno`,`location`,`helmet`,`department`,`year`,`gender`,`name`) VALUES ('$bike_no', '$phone_no', '$location_check', '$helmet_check', '$dept', '$year_check', '$gender_radio','$bikername')";
-  
-if (mysqli_query($conn, $bikeins)) {
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-  
 
-  
+  $query="INSERT INTO `study`(`subj`, `phonenum`, `meetlink`, `platf`, `yearb`, `dept`,`time`,`name1`) VALUES ('$subject','$phone','$meet1link','$platform','$year1','$dept','$time1','$name2')";
+
+  if (mysqli_query($conn, $query)) {
+
+    echo "New record created successfully";
+
+    } else {
+      echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    }
+
+
+
+
+
+
+
+// // $query="INSERT INTO `study` (`subject`, `phoneno`, `meetinglink`,'platform','year','dept','time') VALUES ('$subject','$phone','$platform',' $dept','$year','$meetl','$appt1')";
+// $query="INSERT INTO 'study' ('time') VALUES('$appt1')";
+// if (mysqli_query($conn, $query)) {
+//   echo "New record created successfully";
+//       echo"<script>alert('');</script>  ";
+
+// } else {
+//   echo "Error: " . $query . "<br>" . mysqli_error($conn);
+// }
+
 }
+
+
+
+
 
 ?>
 
@@ -80,7 +100,6 @@ if (mysqli_query($conn, $bikeins)) {
                  
 
 
-
                 <li class="active-link">
                         <a href="homepage.php"><i class="fa fa-desktop "></i>Home </a>
                     </li>
@@ -103,7 +122,6 @@ if (mysqli_query($conn, $bikeins)) {
                     <li>
                         <a href="./forum/index.php"><i class="fa fa-quora" aria-hidden="true" alt='forum image'></i></i>Community Forum</a>
                     </li>
-
                     <li>
                         <a href="logout.php"><i class="fa fa-edit "></i>Logout</a>
                     </li>
@@ -121,7 +139,7 @@ if (mysqli_query($conn, $bikeins)) {
                 </div>              
                  <!-- /. ROW  -->
                 
-                 
+                
                 <div class="row">
                     <div class="col-lg-12 ">
                       
@@ -132,101 +150,80 @@ if (mysqli_query($conn, $bikeins)) {
                  
                   <!-- /. form  --> 
                   <div class="content">
-                    <h3>Hello,Enter Information</h3>
-      <form method="POST">
+                    <!-- <h2>Hello, username</h2>-->
+      <form action="" method="POST"> 
         <div class="user-details">
-          <div class="input-box">
-            <span class="details">Vehicle No.</span>
-            <input type="varchar" name="bikeno" placeholder="ST00VR2022" required>
+        <div class="input-box">
+            <span class="details"autocomplete="off">Name  </span>
+            <input type="text" name="name" placeholder="Name" required>
           </div>
+          <div class="input-box">
+            <span class="details"autocomplete="off">Subject  </span>
+            <input type="text" name="sub" placeholder="Subject" required>
+          </div>
+
           <div class="input-box">
             <span class="details">Phone No.</span>
-            <input type="phone" name="phoneno" placeholder="Phone Number" required>
+            <input type="text" name="phoneno" placeholder="Enter your Phone No." required>
           </div>
-          <div class="checkbox-wrapper-19">
-  <input type="checkbox" id="cbtest-19" name="licensecheck" value="yes" required/>
-  <span>I have Driver's License</span>&emsp;
-  <input type="checkbox" id="cbtest-20" name="helmetcheck" value="yes"/>
-  <span>Extra Helmet</span>
-</div>
           <div class="input-box">
-          <span class="details">Location</span>
-          <select name="location" class="box" required>
-      <option value="Bibwewadi" name="Bibwewadi">Bibwewadi</option>
-      <option value="kondhwa" name="Kondhwa">Kondhwa</option>
-      <option value="Lower_Indiranagar" name="Lower_Indiranagar">Lower Indiranagar</option>
-      <option value="Upper_Indiranagar" name="Upper_Indiranagar">Upper Indiranagar</option>
-      <option value="Chintamaninagar1" name="Chintamaninagar1">Chintamaninagar-1</option>
-      <option value="Chintamaninagar2" name="Chintamaninagar2"selected>Chintamaninagar-2</option>
-      <option value="Dhankavdi" name="Dhankavdi">Dhankavdi</option>
-      <option value="Kothrud" name="Kothrud">Kothrud</option>
-
+          <span class="details">Platform</span>
+          <select name="platform" class="box">
+      <option value="GOOGLEMEET" seleted>Google Meet</option>
+      <option value="MICROSOFT TEAMS">MicrosoftTeams</option>
+      <option value="Zoom">zoom</option>
+      <option value="YOUTUBELIVE" >YouTubeLive</option>
+      <option value="INVITCOLLEGE" >InCollege</option>
+     
     </select>
           </div>
         
          
 <div class="input-box">
           <span class="details">Department</span>
-          <select name="department" class="box" required>
-      <option value="CS" name="CS">CS</option>
-      <option value="IT" name="IT">IT</option>
-      <option value="AIDS" name="AIDS" selected>AI&DS</option>
-      <option value="E&TC" name="E&TC">E&TC</option>
-      <option value="Mechanical" name="Mechanical">Mechanical</option>
-      <option value="Chemical" name="Chemical">Chemical</option>
-      <option value="Instrumentation" name="Instrumentation">Instrumentation</option>
+          <select name="department" class="box">
+      <option value="Computer Science">CS</option>
+      <option value="InformationTechnology">IT</option>
+      <option value="Artifical Intelligence & Data Sc" selected>AIDS</option>
+      <option value="Mechanical" >Mechanical</option>
+      <option value="Chemical" >Chemical</option>
+      <option value="Intrument" >Instrumentation</option>
     </select>
           </div>
           <div class="input-box">
           <span class="details">Year</span>
-          <select name="year" class="box" required>
-      <option value="1st" name="1st">1st</option>
-      <option value="2nd" name="2nd">2nd</option>
-      <option value="3rd" name="3rd">3rd</option>
-      <option value="4th" name="4th">4th</option>
+          <select name="year" class="box">
+      <option value="1st">1st</option>
+      <option value="2nd">2nd</option>
+      <option value="3rd">3rd</option>
+      <option value="4th">4th</option>
+      <option value="all" selected>For all</option>
     </select>
           </div>
           
-        </div>
-        <div class="gender-details">
-          <input type="radio" name="gndr" id="dot-1" value="Male" required>
-          <input type="radio" name="gndr" id="dot-2" value="Female" required>
-          <input type="radio" name="gndr" id="dot-3" value="Prefer not to say" required>
-          <span >Gender</span>
-          <div class="category">
-            <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Male</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Female</span>
-          </label>
-          <label for="dot-3">
-            <span class="dot three"></span>
-            <span class="gender">Prefer not to say</span>
-            </label>
+       
+        <div class="input-box">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Platform Link </span>
+            <input type="text" name="meetlink1" placeholder="Meeting Link" required>
           </div>
+</div>
+    </select>
+          </div>
+          <div class="input-box">
+        <div class="user-details">
+          <label for="appt">Select a time:</label>
+<input type="datetime-local" id="appt" name="appt">
+
+          <div class="category">
+            
+</div>
         </div>
         <div class="button">
-          <a href="bs-simple-admin/bikebuddy_1.php"><input type="submit" name="getp" value="Get your Bike Partner">
+          <input type="submit" name="getp" value="Get your Bike Partner">
         </div>
-
-
-        <?php
-
-//if (isset($_POST['getp'])){
-
- // header("Location:bs-simple-admin/bikebuddy_1.php");
-
-
-//}
-        
-        
-        
-        ?>
-
-
+        </div>
       </form>
     </div>
             <!-- /. WRAPPER  -->

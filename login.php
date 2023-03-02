@@ -1,32 +1,30 @@
 
 <?php
 $passwrong=0;
-include('config.php');
-if (isset($_POST['login'])) 
+echo $password;
+include('../config.php');
+if(isset($_POST['login'])) 
 {
-    $email =$_POST['email'];
-    $password = $_POST['password'];
-    $query="SELECT `email`,`pass`,`uname` FROM users";
-    $result=mysqli_query($conn, $query);
+$email =$_POST['email'];
+$password = $_POST['password'];
+$query="SELECT `email`,`pass`,`uname` FROM users";
+$result=mysqli_query($conn, $query);
         if ($result) 
          {
-            if (mysqli_num_rows($result) > 0)
+            if (mysqli_num_rows($result)>0)
             {
                 while($row = mysqli_fetch_assoc($result)) 
                 {
-                      
                     if($row["email"]==$email && $row["pass"]==$password)
                     {         
-
-                
+                        echo "hyhyuhuy";
                            
-                           // session_start();
+                            // session_start();
                 
-                               //  $_SESSION['user']=$row['uname'];
-                        
-                                 echo"<script>console.log(".$_SESSION['user'].");</script>";
-                                 $_SESSION['login']=1;
-                               header("Location:bs-simple-admin/homepage.php");
+                            //      $_SESSION['user']=$row['uname'];
+                            //     $_SESSION['user_id']=$userid;
+                            //      $_SESSION['login']=1;
+                            //    header("Location:bs-simple-admin/homepage.php");
 
                     }
                     else
@@ -39,8 +37,11 @@ if (isset($_POST['login']))
                 }
            }
 }
-?> 
 
+
+
+
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +50,8 @@ if (isset($_POST['login']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href=" ../css/utilities.css">
+    <link rel="stylesheet" href=" ../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
 
@@ -74,7 +75,8 @@ if (isset($_POST['login']))
     <section class='showcase2'>
     <div class="showcase-form card">
             <h2>Login</h2>
-            <form method="POST" >
+            <form method="POST" action=”<?php echo htmlspecialchars($_SERVER[‘PHP_SELF’]); ?>” >
+                <!-- action -->
                 <div class="form-control">
                     <input type="text" name="email" placeholder="Email" required>
                 </div>
