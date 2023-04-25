@@ -9,6 +9,6 @@ To foster community among students who can teach and learn from each other
 To provide a platform where students can answer each others questions easily
 
 
-Front End :- HTML,CSS,Boorap,JavaScript
+Front End :- HTML,CSS,Bootstrap,JavaScript
 Back End :- PHP
 DATABASE :- MYSQL
